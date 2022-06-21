@@ -1,14 +1,14 @@
 //CSS
-//import styles from './NavBar.module.css'
 import styles from './NavBar.module.css'
 
+//Router
 import { NavLink } from 'react-router-dom'
 
 const NavBar = () => {
   return (
     <nav className={styles.navbar}>
         <NavLink to="/" className={styles.brand}>
-            Mini <span>blog</span>
+            React <span>blog</span>
         </NavLink>
         <ul className={styles.link_list}>
             <li>
@@ -20,7 +20,26 @@ const NavBar = () => {
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/about" className={({ isActive }) => (isActive ? styles.active : "")}>
+                <NavLink 
+                    to="/login" 
+                    className={({ isActive }) => (isActive ? styles.active : "")}
+                >
+                    Entrar
+                </NavLink>
+            </li>
+            <li>
+                <NavLink 
+                    to="/register" 
+                    className={({ isActive }) => (isActive ? styles.active : "")}
+                >
+                    Cadastrar
+                </NavLink>
+            </li>
+            <li>
+                <NavLink 
+                    to="/about" 
+                    className={({ isActive }) => (isActive ? styles.active : "")}
+                >
                     Sobre
                 </NavLink>
             </li>
