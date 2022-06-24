@@ -90,7 +90,11 @@ export const useAuthentication = () => {
 
         try {
 
-            await signInWithEmailAndPassword(auth, data.email, data.password)
+            await signInWithEmailAndPassword(
+                auth, 
+                data.email, 
+                data.password
+            )
             
             setLoadind(false)
 
