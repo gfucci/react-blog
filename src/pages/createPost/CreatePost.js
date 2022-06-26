@@ -33,7 +33,7 @@ const CreatePost = () => {
     }
 
     //create array tags
-    const tagArrays = tags.split(",").map((tag) => {tag.trim().toLowerCase()})
+    const tagArrays = tags.split(",").map((tag) => tag.trim().toLowerCase())
 
     //check values
 
@@ -41,21 +41,19 @@ const CreatePost = () => {
       setFormError("Por favor, preencha todos os campos!");
     }
 
+    if(formError) return
+
     insertDocument({
       title,
       image,
       body,
-      tagArrays,
+      tags: tagArrays,
       uid: user.uid,
       createdBy: user.displayName,
     });
 
     //redirect URL
-    if(formError) {
-      return formError
-    } else {
-      navigate("/")
-    }
+    navigate("/")
   }
 
   return (
