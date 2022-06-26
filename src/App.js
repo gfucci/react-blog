@@ -24,6 +24,7 @@ import Login from './pages/login/Login';
 import DashBoard from './pages/dashboard/DashBoard';
 import CreatePost from './pages/createPost/CreatePost';
 import Search from './pages/search/Search';
+import Post from './pages/Post/Post';
 
 function App() {
 
@@ -49,9 +50,12 @@ function App() {
           <NavBar />
           <div className="container">
             <Routes>
+              {/**ROTAS PUBLICAS */}
               <Route path='/' element={<Home />} />
               <Route path='/search' element={<Search />} />
               <Route path='/about' element={<About />} />
+              <Route path='/posts/:id' element={<Post />} />
+              {/**ROTAS PRIVADAS */}
               <Route path='/register' element={!user ? <Register /> : <Navigate to="/" /> } />
               <Route path='/login' element={!user ? <Login /> : <Navigate to="/" /> } />
               <Route path='/dashboard' element={user ? <DashBoard /> : <Navigate to="/" /> } />
