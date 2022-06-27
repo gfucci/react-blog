@@ -25,6 +25,7 @@ import DashBoard from './pages/dashboard/DashBoard';
 import CreatePost from './pages/createPost/CreatePost';
 import Search from './pages/search/Search';
 import Post from './pages/Post/Post';
+import EditPost from './pages/editPost/EditPost';
 
 function App() {
 
@@ -55,11 +56,12 @@ function App() {
               <Route path='/search' element={<Search />} />
               <Route path='/about' element={<About />} />
               <Route path='/posts/:id' element={<Post />} />
-              {/**ROTAS PRIVADAS */}
               <Route path='/register' element={!user ? <Register /> : <Navigate to="/" /> } />
               <Route path='/login' element={!user ? <Login /> : <Navigate to="/" /> } />
-              <Route path='/dashboard' element={user ? <DashBoard /> : <Navigate to="/" /> } />
-              <Route path='/posts/create' element={user ? <CreatePost /> : <Navigate to="/" /> } />
+              {/**ROTAS PRIVADAS */}
+              <Route path='/dashboard' element={user ? <DashBoard /> : <Navigate to="/login" /> } />
+              <Route path='/posts/create' element={user ? <CreatePost /> : <Navigate to="/login" /> } />
+              <Route path='/posts/edit/:id' element={user ? <EditPost /> : <Navigate to="/login" /> } />
             </Routes>
           </div>
         </BrowserRouter>
