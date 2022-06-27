@@ -1,4 +1,4 @@
-//CSSaaaa
+//CSS
 import styles from './Home.module.css'
 
 //hooks
