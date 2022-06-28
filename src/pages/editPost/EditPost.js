@@ -6,17 +6,25 @@ import { useEffect, useState } from 'react'
 import { useAuthValue } from '../../context/AuthContext'
 import { useFetchDocument } from '../../hooks/useFetchDocument'
 import { useNavigate, useParams } from 'react-router'
+import { useUpdateDocument } from '../../hooks/useUpdateDocument'
 
 const EditPost = () => {
 
+  //document hooks
   const { id } = useParams()
-  const { document: post, response } = useFetchDocument("posts", id)
+  const { document: post } = useFetchDocument("posts", id)
 
+  //form hooks
   const [title, setTitle] = useState("")
   const [image, setImage] = useState("") 
   const [body, setBody] = useState("")
   const [tags, setTags] = useState([])
   const [formError, setFormError] = useState("")
+
+  //Submit Form hooks
+  const { user } = useAuthValue()
+  const { updateDocument, response } = useUpdateDocument("posts")
+  const navigate = useNavigate()
 
   //fill form
   useEffect(() => {
@@ -32,15 +40,7 @@ const EditPost = () => {
     }
   }, [post])
 
-  const { user } = useAuthValue()
-
-  const navigate = useNavigate()
-
-  function handleSubmit() {
-
-  }
-
-  /*const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault()
     setFormError("")
 
@@ -55,25 +55,27 @@ const EditPost = () => {
     const tagArrays = tags.split(",").map((tag) => tag.trim().toLowerCase())
 
     //check values
-
     if (!title || !image || !tags || !body) {
       setFormError("Por favor, preencha todos os campos!");
     }
 
     if(formError) return
 
-    insertDocument({
+    //Update Post
+    const data = {
       title,
       image,
       body,
       tags: tagArrays,
       uid: user.uid,
       createdBy: user.displayName,
-    });
+    }
+
+    updateDocument(id, data);
 
     //redirect URL
-    navigate("/")
-  }*/
+    navigate("/dashboard")
+  }
 
   return (
     <div className={styles.edit_post}>
@@ -104,8 +106,8 @@ const EditPost = () => {
                 onChange={(e) => setImage(e.target.value)}
               />
             </label>
-            <h3>Preview da Imagem:</h3>
-            <img src={post.image} alt={post.title} />
+            <h3 className={styles.preview_title}>Preview da Imagem:</h3>
+            <img className={styles.image_preview} src={post.image} alt={post.title} />
             <label>
               <span>Texto do post:</span>
               <textarea 
@@ -126,11 +128,11 @@ const EditPost = () => {
                 onChange={(e) => setTags(e.target.value)}
               />
             </label>
-            {/*!response.loading && <button className="btn">Postar</button>*/}
-            {/*response.loading && <button className="btn" disabled>Aguarde...</button>*/}
-            {/*(response.error || formError) && (
+            {!response.loading && <button className="btn">Editar</button>}
+            {response.loading && <button className="btn" disabled>Aguarde...</button>}
+            {(response.error || formError) && (
               <p className="error">{response.error || formError}</p>
-            )*/}
+            )}
           </form>
         </>
       )}

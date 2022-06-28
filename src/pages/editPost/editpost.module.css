@@ -10,3 +10,13 @@
     color: #AAA;
     margin-bottom: 2em;
 }
+
+.image_preview {
+    max-width: 100%;
+    margin-bottom: 1em;
+}
+
+.edit_post .preview_title {
+    font-weight: bold;
+    margin-bottom: .2em;
+}
