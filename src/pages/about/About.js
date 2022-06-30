@@ -19,9 +19,9 @@ const About = () => {
       <Link to={navigate} className="btn">
         Criar Post
       </Link>
-      <Link to={{ pathname: "https://github.com/gfucci/react-blog" }} target="_blank" rel="noopener noreferrer" className='btn'>
+      <a href="https://github.com/gfucci/react-blog" target="_blank" rel="noopener noreferrer" className='btn'>
         GitHub
-      </Link>
+      </a>
     </div>
   )
 }
